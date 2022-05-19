@@ -11,6 +11,8 @@ const notes = require("./routes/notes");
 const md =  new MarkdownIt();
 const app = express();
 
+app.use(bp.json());
+
 notes(app);
 app.get("/", (request, response) => {
   return views("index.html", response);
