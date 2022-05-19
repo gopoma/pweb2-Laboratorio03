@@ -3,6 +3,7 @@ const path = require("path");
 const express = require("express");
 const bp = require("body-parser");
 const MarkdownIt = require("markdown-it");
+const views = require("./helpers/views");
 const PORT = 4000;
 
 const notes = require("./routes/notes");
@@ -12,7 +13,7 @@ const app = express();
 
 notes(app);
 app.get("/", (request, response) => {
-  return response.sendFile(path.resolve(__dirname, "views", "index.html"));
+  return views("index.html", response);
 });
 
 app.listen(PORT, () => {
