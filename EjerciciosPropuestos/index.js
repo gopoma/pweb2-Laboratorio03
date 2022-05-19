@@ -1,13 +1,19 @@
+const fs = require("fs");
 const path = require("path");
 const express = require("express");
 const bp = require("body-parser");
 const MarkdownIt = require("markdown-it");
 const PORT = 4000;
 
+const notes = require("./routes/notes");
+
 const md =  new MarkdownIt();
 const app = express();
 
-console.log(md.render("# In my point of view, Excel is a valid database"))
+notes(app);
+app.get("/", (request, response) => {
+  return response.sendFile(path.resolve(__dirname, "views", "index.html"));
+});
 
 app.listen(PORT, () => {
   console.log("Listening on: http://localhost:"+PORT);
